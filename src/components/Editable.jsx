@@ -1,12 +1,15 @@
 import React from 'react';
 
-export default ({ editing, value, onEdit, ...props }) => {
+const Editable = ({ editing, value, onEdit, ...props }) => {
   if (editing) {
-    return <Edit value={value} onEdit={onEdit} {...props} />;
+    return <Editable.Edit value={value} onEdit={onEdit} {...props} />;
   }
 
-  return <span {...props}>{value}</span>;
+  return <Editable.Value value={value}/>;
 };
+
+Editable.Value = ({value, ...props}) =>
+  <span {...props}>{value}</span>;
 
 class Edit extends React.Component {
   render() {
@@ -17,7 +20,7 @@ class Edit extends React.Component {
       autoFocus={true}
       defaultValue={value}
       onBlur={this.finishEdit}
-      onKeyPress={this.checkEnter}
+      onKeyPress={this.checkEnter} 
       {...props}
     />;
   }
@@ -36,3 +39,7 @@ class Edit extends React.Component {
     }
   };
 }
+
+Editable.Edit = Edit;
+
+export default Editable;

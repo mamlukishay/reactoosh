@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import Notes from './components/Notes';
+import style from './main.css'
 
 // if(process.env.NODE_ENV !== 'production') {
 //   React.Perf = require('react-addons-perf');
@@ -32,10 +32,10 @@ class App extends Component {
 
     return (
       <div>
-        <button onClick={this.addNote}>+</button>
+        <button className="add-note" onClick={this.addNote}>+</button>
         <Notes
           notes={notes}
-          onNoteClick={this.activeNoteEdit}
+          onNoteClick={this.activateNoteEdit}
           onEdit={this.editNote}
           onDelete={this.deleteNote}
         />
@@ -62,7 +62,7 @@ class App extends Component {
     });
   }
 
-  activeNoteEdit = (id) => {
+  activateNoteEdit = (id) => {
     this.setState({
       notes: this.state.notes.map(note => {
         if(note.id === id) {
